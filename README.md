@@ -20,7 +20,7 @@ We update two Matplotlib diagrams per 200 episodes. The scatter plot displays <i
 
 
 ### Custom datasets
-We provide a `CMU_parse(file, start=1, frame_skip=5)` function in `bvh.py`. This function properly formats motion capture data from the BVH conversion of the CMU Mocap Dataset into a NumPy tensor. The NumPy tensor can be saved as a file that is used by our `dataloader.py` The default parameters of `CMU_parse` scale the BVH file down from 120FPS to 24FPS.
+We provide a `CMU_parse(file, start=1, frame_skip=5)` function in `bvh.py`. This function properly formats motion capture data from the [BVH conversion of the CMU Mocap Dataset[(https://sites.google.com/a/cgspeed.com/cgspeed/motion-capture) into a NumPy tensor. The NumPy tensor can be saved as a file that is used by our `dataloader.py` The default parameters of `CMU_parse` scale the BVH file down from 120FPS to 24FPS.
 
 ## Evaluation
 To evaluate with our model, download our pre-trained model from the [releases](https://github.com/MiniEval/pytorch-gken/releases/tag/1) page and place `model.pt` in the repository root. Alternatively, you may train your own model with `train.py`. 
@@ -30,5 +30,9 @@ The evaluation accepts BVH files as input, using the CMU Mocap skeleton format. 
 `python eval.py [BVH FILE] [NUMBER OF KEYFRAMES]`
 
 # Human annotations
-
 In the [releases](https://github.com/MiniEval/pytorch-gken/releases/tag/1) page, we provide five sets of human annotations in `Keyframe Extraction - Demonstration.blend`, which can be opened using [Blender](https://www.blender.org/).
+
+# Acknowledgements
+The motion capture data used in this project was obtained from [mocap.cs.cmu.edu](https://mocap.cs.cmu.edu). The database was created with funding from the American National Science Foundation, under EIA-0196217.
+
+The BVH file parsing module was written by [20tab srl](https://github.com/20tab/bvh-python).
