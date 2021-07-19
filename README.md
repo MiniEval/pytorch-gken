@@ -31,4 +31,4 @@ The evaluation accepts BVH files as input, using the CMU Mocap skeleton format. 
 
 # Human annotations
 
-We provide five sets of human annotations in `Keyframe Extraction - Demonstration.blend`, which can be opened using [Blender](https://www.blender.org/).
+In the releases page, we provide five sets of human annotations in `Keyframe Extraction - Demonstration.blend`, which can be opened using [Blender](https://www.blender.org/).
