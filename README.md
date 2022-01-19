@@ -1,5 +1,5 @@
 # Graph Keyframe Evaluation Network - PyTorch implementation
-Official Pytorch implementation of the ACM MM'21 paper: Keyframe Extraction from Motion Capture Sequences with Graph based Deep Reinforcement Learning
+Official Pytorch implementation of the ACM MM'21 paper: [Keyframe Extraction from Motion Capture Sequences with Graph based Deep Reinforcement Learning]{https://dl.acm.org/doi/10.1145/3474085.3475635}
 
 # Prerequisites
 - [Python 3.9](https://www.python.org/)
