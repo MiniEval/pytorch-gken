@@ -3,6 +3,7 @@
 import math
 import numpy as np
 import torch
+from scipy.spatial.transform import Rotation
 
 NUM_BONES = 23
 
@@ -31,25 +32,8 @@ class CMUSpatialHelper:
 
             vector = np.zeros((self.local_rot.shape[0], 4, 4), dtype=np.float32)
 
-            cos_z = np.cos(rotation[:, 0] * 0.5)
-            sin_z = np.sin(rotation[:, 0] * 0.5)
-            cos_y = np.cos(rotation[:, 1] * 0.5)
-            sin_y = np.sin(rotation[:, 1] * 0.5)
-            cos_x = np.cos(rotation[:, 2] * 0.5)
-            sin_x = np.sin(rotation[:, 2] * 0.5)
-
-            vector[:, 0, 0] = (cos_z * cos_y)
-            vector[:, 0, 1] = (cos_z * sin_y * sin_x) - (sin_z * cos_x)
-            vector[:, 0, 2] = (cos_z * sin_y * cos_x) + (sin_z * sin_x)
-
-            vector[:, 1, 0] = sin_z * cos_y
-            vector[:, 1, 1] = (sin_z * sin_y * sin_x) + (cos_z * cos_x)
-            vector[:, 1, 2] = (sin_z * sin_y * cos_x) - (cos_z * sin_x)
-
-            vector[:, 2, 0] = -sin_y
-            vector[:, 2, 1] = cos_y * sin_x
-            vector[:, 2, 2] = cos_y * cos_x
-
+            r = Rotation.from_euler("ZYX", rotation[:, [2, 1, 0]])
+            vector[:, :3, :3] = r.as_matrix()
             vector[:, :3, 3] = location
 
             vector[:, 3, 3] = 1
@@ -62,14 +46,8 @@ class CMUSpatialHelper:
             else:
                 transform = torch.eye(4).unsqueeze(0).repeat(self.local_rot.shape[0], 1, 1)
 
-            vectors = []
             transform_matrix = torch.from_numpy(self.get_transform_matrix()).float()
             self.global_transform = torch.bmm(transform, transform_matrix)
-            # print(transform_matrix[0], self.global_transform[0])
-
-            # for i in range(transform.shape[0]):
-            #     vectors.append(np.matmul(transform[i], transform_matrix[i]))
-            # self.global_transform = np.stack(vectors, axis=0)
 
             return self.global_transform
 
