@@ -12,7 +12,7 @@ import sys
 class Trainer:
     def __init__(self, train_sample_len=72):
         self.env = Env()
-        self.agent = KeyframeExtractor(gamma=0.99, eps=1.0, eps_factor=2000, learning_rate=0.0004,
+        self.agent = KeyframeExtractor(gamma=1.0, eps=1.0, eps_factor=2000, learning_rate=0.0004,
                                        training_len=train_sample_len, mem_size=100000, batch_size=256, tau=(200, 1.0))
 
         self.steps = 0
